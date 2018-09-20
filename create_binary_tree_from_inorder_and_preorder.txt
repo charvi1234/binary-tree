@@ -1,0 +1,36 @@
+//https://www.interviewbit.com/problems/construct-binary-tree-from-inorder-and-preorder/
+/*
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ TreeNode* create(vector <int> &inorder, vector <int> &preorder, int low, int high,int &index)
+ {
+     if(high<low)
+     return NULL;
+     struct TreeNode *nn = (TreeNode *)malloc(sizeof(TreeNode *));
+     nn->val=preorder[index];
+     int i;
+     for(i=low;i<=high;i++)
+     {
+         if(inorder[i]==preorder[index])
+         {
+             break;
+         }
+     }
+     index++;
+     nn->left=create(inorder,preorder,low,i-1,index);
+     nn->right=create(inorder,preorder,i+1,high,index);
+     return nn;
+ }
+TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) 
+{
+    int high = A.size();
+    int low=0;
+    int index = 0;
+    return create(B,A,low,high-1,index);
+}
