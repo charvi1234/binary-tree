@@ -1,0 +1,36 @@
+//https://www.interviewbit.com/problems/binary-tree-from-inorder-and-postorder/
+/*
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+struct TreeNode* create(vector<int> &inorder, vector<int>&postorder,int low,int high,int &index)
+{
+    if(high<low)
+    return NULL;
+    struct TreeNode* nn = (TreeNode*)malloc(sizeof(TreeNode*));
+    nn->val=postorder[index];
+    int i;
+    for(i=low;i<=high;i++)
+    {
+        if(inorder[i]==postorder[index])
+        {
+            break;
+        }
+    }
+    index--;
+    nn->right=create(inorder,postorder,i+1,high,index);
+    nn->left=create(inorder,postorder,low,i-1,index);
+    return nn;
+}
+TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) 
+{
+    int high=A.size()-1;
+    int low=0;
+    int index=high;
+    return create(A,B,low,high,index);
+}
