@@ -1,0 +1,34 @@
+/*
+https://www.interviewbit.com/problems/path-sum/
+*/
+/*
+*
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ int func(TreeNode*root,int sum,int B)
+ {
+    if(!root)
+    return 0;
+    sum=sum+root->val;
+    if(!root->left&&!root->right)
+    {
+        if(sum==B)
+        {
+        return 1;
+        }
+        return 0;
+    }
+      return(func(root->left,sum,B)|func(root->right,sum,B));
+ }
+int Solution::hasPathSum(TreeNode* A, int B) 
+{
+    int sum=0;
+    int r = func(A,sum,B);
+    return r;
+}
