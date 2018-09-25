@@ -1,0 +1,33 @@
+//https://www.interviewbit.com/problems/postorder-traversal/
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+vector<int> Solution::postorderTraversal(TreeNode* root) {
+    vector <int> sol;
+    stack <struct TreeNode*> s1;
+    stack <struct TreeNode*> s2;
+    s1.push(root);
+    while(!s1.empty())
+    {
+        struct TreeNode * node=s1.top();
+        s1.pop();
+        s2.push(node);
+        if(node->left)
+        s1.push(node->left);
+        if(node->right)
+        s1.push(node->right);
+    }
+    while(!s2.empty())
+    {
+        struct TreeNode* x=s2.top();
+        sol.push_back(x->val);
+        s2.pop();
+    }
+    return sol;
+}
