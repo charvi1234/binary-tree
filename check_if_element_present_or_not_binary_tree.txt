@@ -1,0 +1,23 @@
+/* Any extra functions you would like to add, code here */
+
+int isPresent(node* root, int val){
+    /* For your reference
+       struct node {
+        struct node *left,*right;
+        int val;
+    };
+    */
+    int a,b;
+    if(root==NULL)
+        return 0;
+    if(root->val==val)
+        return 1;
+    else
+    {
+        if(val<root->val)
+        a = isPresent(root->left,val);
+        else if(val>root->val)
+        b = isPresent(root->right,val);
+        return a&&b;
+    }
+}
