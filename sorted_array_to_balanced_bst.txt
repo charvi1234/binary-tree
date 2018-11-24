@@ -1,4 +1,3 @@
-//https://www.interviewbit.com/problems/sorted-array-to-balanced-bst/
 /**
  * Definition for binary tree
  * class TreeNode {
