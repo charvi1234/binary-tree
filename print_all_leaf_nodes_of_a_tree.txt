@@ -1,0 +1,67 @@
+import java.util.*;
+// Other imports go here
+// Do NOT change the class name
+class Node
+{
+  Node left;
+  Node right;
+  int data;
+  public Node(int key)
+  {
+    left=right=null;
+    data=key;
+  }
+}
+class Main
+{
+  static Node bst(int val,Node root)
+  {
+    if(root==null)
+    {
+      Node nn = new Node(val);
+      return nn;
+    }
+    else if(root.data>val)
+    {
+      root.left = bst(val,root.left);
+    }
+    else
+    {
+      root.right = bst(val,root.right);
+    }
+    return root;
+  }
+    static void print(Node root)
+    {
+      Queue<Node> q = new LinkedList<>();
+      q.add(root);
+      while(!q.isEmpty())
+      {
+        Node t = q.poll();
+        if(t.left!=null)
+          q.add(t.left);
+        if(t.right!=null)
+          q.add(t.right);
+        if(t.left==null&&t.right==null)
+          System.out.println(t.data);
+      }
+    }
+    public static void main(String[] args)
+    {
+       int n;
+      Node root = null;
+      Scanner scan = new Scanner(System.in);
+      n = scan.nextInt();
+      int arr[] = new int[n];
+      int i;
+      for(i=0;i<n;i++)
+      {
+        arr[i] = scan.nextInt();
+      }
+      for(i=0;i<n;i++)
+      {
+        root = bst(arr[i],root);
+      }
+      print(root);
+    }
+    }
